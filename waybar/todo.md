@@ -1,0 +1,5 @@
+- Remove power button
+- Battery percentage by default
+- no more military time
+- maybe mess with colors
+- FIX THE STYLES

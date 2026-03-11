@@ -1,0 +1,14 @@
+[mgr]
+show_hidden = true
+
+[[mgr.prepend_keymap]]
+on  = "y"
+run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ]
+
+[opener]
+edit = [
+{ run = 'kitty fish -c "nvim "$@""', orphan=true, desc = "$EDITOR", for = "unix" },
+]
+play = [
+  { run = "vlc %s", orphan = true, for = "unix" },
+]
