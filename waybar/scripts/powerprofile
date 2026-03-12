@@ -20,8 +20,8 @@ show() {
     performance) icon="󰓅" ;;   # bolt / performance
     *)           icon="󰒋" ;;   # power icon fallback
   esac
-  # JSON for Waybar: bar shows icon only, tooltip shows profile name
-  printf '{"text":"%s","tooltip":"%s"}\n' "$icon" "${current:-unknown}"
+  # i3blocks-style: $text\n$tooltip\n$class (Waybar doesn't support {text}/{tooltip} in custom modules)
+  printf '%s\n%s\n%s\n' "$icon" "${current:-unknown}" "${current:-unknown}"
 }
 
 case "${1:-}" in
