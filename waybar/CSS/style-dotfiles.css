@@ -68,10 +68,16 @@
 }
 
 
-#clock {
+#clock,
+#clock\#date {
   color : @text;
-  /* background : @maroon; */
+  background-color : @mauve !important;
   padding : 0 10px;
+}
+
+#clock label,
+#clock\#date label {
+  background-color : @mauve !important;
 }
 
 #custom-arch {

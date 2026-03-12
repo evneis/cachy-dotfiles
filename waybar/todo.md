@@ -1,5 +1,3 @@
-- Remove power button
-- Battery percentage by default
-- no more military time
+- Calendar popup
 - maybe mess with colors
 - FIX THE STYLES
