@@ -93,6 +93,7 @@
     "modules": [
       "backlight",
       "wireplumber",
+      "custom/powerprofile",
       // "custom/power",
       "battery",
     ],
@@ -265,6 +266,14 @@
     "format-icons": "󰂚",
     "on-click": "swaync-client -t -sw",
     "tooltip-format": "Notification Center",
+  },
+  "custom/powerprofile": {
+    "format": "{}",
+    "exec": "/home/evan/.config/waybar/scripts/powerprofile",
+    "exec-on-event": "true",
+    "interval": 5,
+    "tooltip-format": "{}",
+    "on-click": "/home/evan/.config/waybar/scripts/powerprofile cycle",
   },
   "custom/htb-vpn": {
     "format": "{}",
