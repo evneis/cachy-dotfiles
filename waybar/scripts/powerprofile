@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Waybar power profile widget: show current profile, cycle on click
+
+cycle() {
+  current=$(powerprofilesctl get 2>/dev/null)
+  case "$current" in
+    power-saver) next="balanced" ;;
+    balanced)     next="performance" ;;
+    performance)  next="power-saver" ;;
+    *)            next="balanced" ;;
+  esac
+  powerprofilesctl set "$next" 2>/dev/null
+}
+
+show() {
+  current=$(powerprofilesctl get 2>/dev/null)
+  case "$current" in
+    power-saver) icon=$'\U000F032A' ;;   # nf-md-leaf
+    balanced)    icon="⚖" ;;   # scales
+    performance) icon="󰓅" ;;   # bolt / performance
+    *)           icon="󰒋" ;;   # power icon fallback
+  esac
+  # JSON for Waybar: bar shows icon only, tooltip shows profile name
+  printf '{"text":"%s","tooltip":"%s"}\n' "$icon" "${current:-unknown}"
+}
+
+case "${1:-}" in
+  cycle) cycle ;;
+  *)     show ;;
+esac
