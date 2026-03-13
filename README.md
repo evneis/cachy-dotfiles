@@ -10,6 +10,7 @@ Hyprland-based desktop configuration for Arch Linux: compositor, status bar, fil
 | **waybar/**| Waybar status bar (config, layouts, CSS, scripts). See [waybar/dependency.md](waybar/dependency.md) for module-level details. |
 | **yazi/**  | Yazi terminal file manager config and keymap |
 | **fastfetch/** | Fastfetch system info config |
+| **user/share/sddm** | SDDM login manager themes and configs |
 
 ## Dependencies
 
@@ -44,7 +45,8 @@ sudo pacman -S \
   gnome-settings-daemon \
   fish \
   vlc \
-  nvim
+  nvim \
+  nm-applet
 ```
 
 ### AUR
@@ -76,10 +78,11 @@ yay -S ttf-jetbrains-mono-nerd
 sudo pacman -S hyprland hyprpaper waybar wireplumber playerctl pacman-contrib \
   wlogout libnotify kitty btop fastfetch rofi dolphin networkmanager \
   network-manager-applet swaync grim slurp wl-clipboard brightnessctl \
-  power-profiles-daemon qt6ct gnome-settings-daemon fish vlc nvim
+  power-profiles-daemon qt6ct gnome-settings-daemon fish vlc nvim nm-applet \
+  --needed
 
 # AUR (with yay)
-yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd
+yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd cursor
 ```
 
 ## Setup
