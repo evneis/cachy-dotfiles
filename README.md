@@ -79,7 +79,7 @@ sudo pacman -S hyprland hyprpaper waybar wireplumber playerctl pacman-contrib \
   wlogout libnotify kitty btop fastfetch rofi dolphin networkmanager \
   network-manager-applet swaync grim slurp wl-clipboard brightnessctl \
   power-profiles-daemon qt6ct gnome-settings-daemon fish vlc nvim nm-applet \
-  --needed
+  vesktop --needed
 
 # AUR (with yay)
 yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd cursor
