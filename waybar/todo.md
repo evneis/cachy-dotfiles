@@ -1,3 +1,4 @@
 - Calendar popup
+- move notifs to center
 - maybe mess with colors
 - FIX THE STYLES
