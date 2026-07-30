@@ -279,6 +279,7 @@
     "exec": "/home/evan/.config/waybar/scripts/powerprofile",
     "exec-on-event": "true",
     "interval": 5,
+    "signal": 8,
     "tooltip-format": "{}",
     "on-click": "/home/evan/.config/waybar/scripts/powerprofile cycle",
   },

@@ -10,6 +10,8 @@ cycle() {
     *)            next="balanced" ;;
   esac
   powerprofilesctl set "$next" 2>/dev/null
+  # Refresh Waybar custom/powerprofile (signal: 8) immediately
+  pkill -RTMIN+8 waybar 2>/dev/null || true
 }
 
 show() {

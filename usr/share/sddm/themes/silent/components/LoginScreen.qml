@@ -31,6 +31,14 @@ Item {
 
     property bool foundUsers: userModel.count > 0
 
+    property int computedInputMethodHintsOnly: {
+		if(Config.virtualKeyboardRestrictInput === "digits") {
+			return Qt.ImhDigitsOnly;
+		} else {
+			return Qt.ImhNone;
+		}
+    }
+
     // Login info
     property int sessionIndex: 0
     property int userIndex: 0
@@ -63,7 +71,6 @@ Item {
         target: sddm
     }
 
-    // FIX: Critical connections memory leak prevention?
     Component.onDestruction: {
         if (typeof connections !== 'undefined') {
             connections.target = null;
@@ -175,6 +182,7 @@ Item {
                 icon: Config.getIcon("user-default")
                 placeholder: (textConstants && textConstants.userName) ? textConstants.userName : "Password"
                 isPassword: false
+                inputMethodHints: loginScreen.computedInputMethodHintsOnly
                 splitBorderRadius: false
                 enabled: loginScreen.state !== "authenticating"
                 onAccepted: {
@@ -196,7 +204,7 @@ Item {
 
         UserSelector {
             id: userSelector
-            listUsers: loginScreen.state === "selectingUser"
+            listUsers: loginScreen.state === "selectingUser" || Config.avatarAlwaysActive
             enabled: loginScreen.state !== "authenticating"
             visible: true
             activeFocusOnTab: true
@@ -307,6 +315,7 @@ Item {
                     icon: Config.getIcon(Config.passwordInputIcon)
                     placeholder: (textConstants && textConstants.password) ? textConstants.password : "Password"
                     isPassword: true
+                    inputMethodHints: loginScreen.computedInputMethodHintsOnly
                     splitBorderRadius: true
                     onAccepted: {
                         loginScreen.login();
@@ -449,12 +458,12 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            if (loginScreen.state === "selectingUser") {
+            if (loginScreen.state === "selectingUser" && !Config.avatarAlwaysActive) {
                 safeStateChange("normal");
             }
         }
         onWheel: event => {
-            if (loginScreen.state === "selectingUser") {
+            if (loginScreen.state === "selectingUser" || Config.avatarAlwaysActive) {
                 if (event.angleDelta.y < 0) {
                     userSelector.nextUser();
                 } else {
