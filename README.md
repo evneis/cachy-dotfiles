@@ -6,7 +6,7 @@ Hyprland-based desktop configuration for Arch Linux: compositor, status bar, fil
 
 | Folder      | Description |
 |------------|-------------|
-| **hypr/**  | Hyprland compositor config (`hyprland.conf`, `keybinds.conf`, `hyprpaper.conf`) |
+| **hypr/**  | Hyprland compositor config (`hyprland.conf`, `keybinds.conf`, `hyprpaper.conf`, `hyprlock.conf`) |
 | **waybar/**| Waybar status bar (config, layouts, CSS, scripts). See [waybar/dependency.md](waybar/dependency.md) for module-level details. |
 | **wlogout/** | Session power menu layout and style (lock uses `hyprlock`) |
 | **yazi/**  | Yazi terminal file manager config and keymap |

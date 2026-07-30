@@ -1,0 +1,23 @@
+---
+description: Keep README.md package lists in sync when configs add or mention new packages
+alwaysApply: true
+---
+
+# README package sync
+
+When adding, enabling, or documenting a program/tool in this repo (keybinds, autostart, scripts, modules, themes, setup steps), update `README.md` in the same change.
+
+## What to update
+
+1. **Pacman** block under Dependencies — official Arch packages required by the configs
+2. **AUR** block — AUR packages required for default setup
+3. **Optional / replaceable** — packages only used if a feature/keybind is opted into
+4. **Quick install** — keep in sync with the Pacman/AUR lists above
+5. **Structure / Setup** — if a new config folder or install step is needed
+
+## Rules
+
+- Use real Arch package names (`neovim` not `nvim`; omit binaries that come from another listed package, e.g. `nm-applet` → `network-manager-applet`)
+- Prefer pacman over AUR when the package exists in official repos
+- Do not add one-off personal paths or unrelated system packages
+- If unsure whether something is optional, put it under Optional and note where it is referenced
