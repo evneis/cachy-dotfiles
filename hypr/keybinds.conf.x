@@ -20,6 +20,7 @@ bind = $mainMod, V, togglefloating,
 bind = $mainMod, SPACE, exec, $menu
 bind = $mainMod, X, exec, /home/evan/.config/waybar/scripts/powerprofile cycle
 bind = $mainMod, P, pseudo, # dwindle
+bind = $mainMod, L, exec, hyprlock
 bind = $mainMod, J, layoutmsg, togglesplit # dwindle
 bind = $mainMod SHIFT, B, exec, $browser # dwindle
 bind = $mainMod SHIFT, O, exec, obsidian # dwindle

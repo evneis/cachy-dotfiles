@@ -2,6 +2,8 @@
 
 Hyprland-based desktop configuration for Arch Linux: compositor, status bar, file manager, and system info.
 
+For a complete NVIDIA, Windows dual-boot, and Secure Boot installation walkthrough, see [CachyOS desktop setup](CACHYOS_SETUP.md).
+
 ## Structure
 
 | Folder      | Description |
@@ -21,12 +23,16 @@ Target: **Arch Linux** (pacman + AUR). Adjust for your terminal, AUR helper, and
 
 ```bash
 sudo pacman -S \
+  base-devel \
+  git \
   hyprland \
   hyprpaper \
   hyprlock \
   xdg-desktop-portal-hyprland \
+  xdg-desktop-portal-gtk \
   waybar \
   pipewire \
+  pipewire-pulse \
   wireplumber \
   playerctl \
   pacman-contrib \
@@ -50,11 +56,13 @@ sudo pacman -S \
   gnome-settings-daemon \
   fish \
   vlc \
+  imv \
   neovim \
   sddm \
   qt6-svg \
   qt6-virtualkeyboard \
   qt6-multimedia \
+  qt6-multimedia-ffmpeg \
   qt6-imageformats
 ```
 
@@ -80,17 +88,19 @@ yay -S ttf-jetbrains-mono-nerd
 - **blueman** – Only if you enable Waybar’s `bluetooth` module and its `on-click` (e.g. `blueman-manager`).
 - **qt6ct** – Qt theming; optional if you don’t care about Qt app appearance.
 - **sddm-silent-theme** – AUR package alternative to copying `usr/share/sddm/themes/silent` from this repo.
+- **sbctl** – Required only for the Secure Boot workflow in [CACHYOS_SETUP.md](CACHYOS_SETUP.md).
 
 ## Quick install (packages only)
 
 ```bash
 # Core + Waybar + Hyprland helpers + SDDM (Silent theme Qt deps)
-sudo pacman -S hyprland hyprpaper hyprlock xdg-desktop-portal-hyprland \
-  waybar pipewire wireplumber playerctl pacman-contrib wlogout libnotify \
+sudo pacman -S base-devel git hyprland hyprpaper hyprlock \
+  xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
+  waybar pipewire pipewire-pulse wireplumber playerctl pacman-contrib wlogout libnotify \
   kitty btop fastfetch yazi rofi dolphin networkmanager network-manager-applet \
   swaync grim slurp wl-clipboard brightnessctl power-profiles-daemon qt6ct \
-  gnome-settings-daemon fish vlc neovim sddm qt6-svg qt6-virtualkeyboard \
-  qt6-multimedia qt6-imageformats --needed
+  gnome-settings-daemon fish vlc imv neovim sddm qt6-svg qt6-virtualkeyboard \
+  qt6-multimedia qt6-multimedia-ffmpeg qt6-imageformats --needed
 
 # AUR (with yay)
 yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd
@@ -112,7 +122,7 @@ yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd
 
 2. **Hyprland**: Uses `kitty`, `dolphin`, `walker`, `zen-browser`; change `hyprland.conf` if you use different apps.
 3. **Waybar**: Uses `fish` and `kitty` in some on-click commands; see [waybar/dependency.md](waybar/dependency.md) for modules and alternatives.
-4. **Yazi**: Opens `nvim` and `vlc` for edit/play; uses `kitty` and `fish` in the opener. Adjust `yazi.toml` if your stack differs.
+4. **Yazi**: Opens `nvim`, `vlc`, and `imv` for edit/play/images; uses `kitty` and `fish` in the opener. Adjust `yazi.toml` if your stack differs.
 5. **wlogout**: Lock action runs `hyprlock`; other actions use `systemctl` / `loginctl`.
 6. **SDDM (Silent)**: Copy or symlink `usr/share/sddm/themes/silent` into `/usr/share/sddm/themes/`, set the theme in `/etc/sddm.conf`, and enable `InputMethod=qtvirtualkeyboard`. Test with the theme’s `test.sh` before reboot. See the theme’s README for details.
 7. **Fastfetch**: Optional `~/.config/fastfetch/logo.png`; config works without it.

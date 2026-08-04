@@ -7,8 +7,16 @@ run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text
 
 [opener]
 edit = [
-{ run = 'kitty fish -c "nvim "$@""', orphan=true, desc = "$EDITOR", for = "unix" },
+    { run = 'kitty fish -c "nvim "$@""', orphan=true, desc = "$EDITOR", for = "unix" },
 ]
 play = [
   { run = "vlc %s", orphan = true, for = "unix" },
+]
+image = [
+  { run = 'imv "$@"', orphan = true, desc = "imv", for = "unix" },
+]
+
+[open]
+prepend_rules = [
+  { mime = "image/*", use = [ "image" ] },
 ]

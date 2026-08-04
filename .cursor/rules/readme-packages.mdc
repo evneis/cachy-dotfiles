@@ -1,23 +1,40 @@
 ---
-description: Keep README.md package lists in sync when configs add or mention new packages
+description: Keep README.md package lists in sync when configs reference new packages/binaries
 alwaysApply: true
 ---
 
 # README package sync
 
-When adding, enabling, or documenting a program/tool in this repo (keybinds, autostart, scripts, modules, themes, setup steps), update `README.md` in the same change.
+Whenever a config change **references a program/binary** that this setup depends on, update `README.md` in the **same turn** before considering the task done. Do not wait to be asked.
 
-## What to update
+## Triggers (any of these)
 
-1. **Pacman** block under Dependencies — official Arch packages required by the configs
-2. **AUR** block — AUR packages required for default setup
-3. **Optional / replaceable** — packages only used if a feature/keybind is opted into
-4. **Quick install** — keep in sync with the Pacman/AUR lists above
-5. **Structure / Setup** — if a new config folder or install step is needed
+- Openers, MIME handlers, previewers (`yazi.toml`, desktop files, xdg)
+- Keybinds, autostart, scripts, Waybar `exec` / `on-click`
+- Modules, themes, SDDM, install/setup docs
+- Replacing one tool with another (add the new package; remove the old if nothing else uses it)
+
+## Checklist before finishing
+
+1. List every new command/binary introduced or newly required by the change
+2. Map each to its Arch package name (`nvim` → `neovim`, `imv` → `imv`, `nm-applet` → `network-manager-applet`)
+3. Confirm it is already in README **Pacman**, **AUR**, or **Optional** — if not, add it
+4. Keep **Quick install** in sync with Pacman/AUR
+5. Update Structure / Setup notes when a folder or install step changes
+
+## Where to put it
+
+1. **Pacman** — official repos, required by default configs
+2. **AUR** — required for default setup
+3. **Optional / replaceable** — only if a feature/keybind is opted into; note where it is referenced
 
 ## Rules
 
-- Use real Arch package names (`neovim` not `nvim`; omit binaries that come from another listed package, e.g. `nm-applet` → `network-manager-applet`)
+- Use real Arch package names; omit binaries that come from another listed package
 - Prefer pacman over AUR when the package exists in official repos
 - Do not add one-off personal paths or unrelated system packages
-- If unsure whether something is optional, put it under Optional and note where it is referenced
+- If unsure whether something is optional, put it under Optional and note the file that references it
+
+## Example
+
+Wiring Yazi images to `imv` requires adding `imv` to Pacman + Quick install and mentioning it in the Yazi setup bullet — not only editing `yazi.toml`.
