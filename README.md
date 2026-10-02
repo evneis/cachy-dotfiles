@@ -57,6 +57,7 @@ sudo pacman -S \
   fish \
   vlc \
   imv \
+  tdf \
   neovim \
   sddm \
   qt6-svg \
@@ -99,7 +100,7 @@ sudo pacman -S base-devel git hyprland hyprpaper hyprlock \
   waybar pipewire pipewire-pulse wireplumber playerctl pacman-contrib wlogout libnotify \
   kitty btop fastfetch yazi rofi dolphin networkmanager network-manager-applet \
   swaync grim slurp wl-clipboard brightnessctl power-profiles-daemon qt6ct \
-  gnome-settings-daemon fish vlc imv neovim sddm qt6-svg qt6-virtualkeyboard \
+  gnome-settings-daemon fish vlc imv tdf neovim sddm qt6-svg qt6-virtualkeyboard \
   qt6-multimedia qt6-multimedia-ffmpeg qt6-imageformats --needed
 
 # AUR (with yay)
@@ -122,7 +123,7 @@ yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd
 
 2. **Hyprland**: Uses `kitty`, `dolphin`, `walker`, `zen-browser`; change `hyprland.conf` if you use different apps.
 3. **Waybar**: Uses `fish` and `kitty` in some on-click commands; see [waybar/dependency.md](waybar/dependency.md) for modules and alternatives.
-4. **Yazi**: Opens `nvim`, `vlc`, and `imv` for edit/play/images; uses `kitty` and `fish` in the opener. Adjust `yazi.toml` if your stack differs.
+4. **Yazi**: Opens `nvim`, `vlc`, `imv`, and `tdf` for edit/play/images/PDFs; uses `kitty` and `fish` in the opener. Adjust `yazi.toml` if your stack differs.
 5. **wlogout**: Lock action runs `hyprlock`; other actions use `systemctl` / `loginctl`.
 6. **SDDM (Silent)**: Copy or symlink `usr/share/sddm/themes/silent` into `/usr/share/sddm/themes/`, set the theme in `/etc/sddm.conf`, and enable `InputMethod=qtvirtualkeyboard`. Test with the theme’s `test.sh` before reboot. See the theme’s README for details.
 7. **Fastfetch**: Optional `~/.config/fastfetch/logo.png`; config works without it.

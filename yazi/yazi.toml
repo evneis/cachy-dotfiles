@@ -15,8 +15,12 @@ play = [
 image = [
   { run = 'imv "$@"', orphan = true, desc = "imv", for = "unix" },
 ]
+pdf = [
+  { run = 'tdf "$@"', block = true, desc = "tdf", for = "unix" },
+]
 
 [open]
 prepend_rules = [
   { mime = "image/*", use = [ "image" ] },
+  { mime = "application/pdf", use = [ "pdf" ] },
 ]
