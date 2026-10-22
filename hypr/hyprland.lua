@@ -274,3 +274,11 @@ hl.window_rule({
 	move = "20 monitor_h-120",
 	float = true,
 })
+
+-- Keep VLC fully opaque when unfocused (global inactive_opacity is 0.85)
+hl.window_rule({
+	name = "vlc-opaque",
+	match = { class = "^(vlc)$" },
+
+	opacity = "1.0 1.0",
+})

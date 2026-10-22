@@ -1,4 +1,4 @@
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["!"]
 run = 'shell "$SHELL"'
 desc = "Open shell here"
@@ -7,3 +7,9 @@ desc = "Open shell here"
 on = [ ".", "s" ]
 run  = "plugin what-size"
 desc = "Calc size of selection or cwd" 
+
+[[mgr.prepend_keymap]]
+on   = "<C-t>"
+for  = "unix"
+run  = "shell --orphan -- kitty"
+desc = "Open terminal here"

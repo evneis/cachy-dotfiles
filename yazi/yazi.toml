@@ -7,16 +7,16 @@ run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text
 
 [opener]
 edit = [
-    { run = 'kitty fish -c "nvim "$@""', orphan=true, desc = "$EDITOR", for = "unix" },
+    { run = 'kitty fish -c "nvim %s"', orphan = true, desc = "nvim", for = "unix" },
 ]
 play = [
   { run = "vlc %s", orphan = true, for = "unix" },
 ]
 image = [
-  { run = 'imv "$@"', orphan = true, desc = "imv", for = "unix" },
+  { run = "imv %s", orphan = true, desc = "imv", for = "unix" },
 ]
 pdf = [
-  { run = 'tdf "$@"', block = true, desc = "tdf", for = "unix" },
+  { run = "tdf %s", block = true, desc = "tdf", for = "unix" },
 ]
 
 [open]
