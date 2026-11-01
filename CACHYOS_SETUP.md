@@ -14,6 +14,11 @@ applies this repository's Hyprland configuration. It is tailored to:
 Read the whole guide before changing partitions or Secure Boot keys. Back up
 anything that cannot be replaced.
 
+> **Current config note:** This repository now uses a Lua-based Hyprland
+> configuration (`hypr/hyprland.lua` and `hypr/keybinds.lua`). Where this guide
+> refers to `hyprland.conf` or `keybinds.conf`, use the Lua files. For the
+> post-install wiring checklist, see [WIRING.md](WIRING.md).
+
 ## 1. Before downloading CachyOS
 
 ### Back up Windows
@@ -90,7 +95,7 @@ Launch the graphical installer and make these selections:
 1. **Language:** English (United States), or the language you actually use.
 2. **Region and timezone:** your physical location.
 3. **Keyboard:** English (US). If using another layout, also change
-   `kb_layout = us` later in `hypr/hyprland.conf`.
+   `kb_layout = us` later in `hypr/hyprland.lua`.
 4. **Partitioning:** Manual partitioning.
 5. **Boot manager:** Limine.
 6. **Filesystem:** Btrfs for `/`.
@@ -259,24 +264,31 @@ readlink -f ~/.config/{hypr,waybar,wlogout,yazi,fastfetch}
 Edit files in `~/Projects/Dotfiles`; the symlinks make those edits live.
 
 1. **Monitors:** run `hyprctl monitors all`. Replace the laptop-specific
-   `eDP-1` and `HDMI-A-1` lines in `hypr/hyprland.conf` with the desktop's
-   connector names, resolution, refresh rate, position, and scale. A safe
-   temporary fallback is:
+   `eDP-1` and `HDMI-A-1` `hl.monitor` blocks in `hypr/hyprland.lua` with the
+   desktop's connector names, resolution, refresh rate, position, and scale. A
+   safe temporary fallback is:
 
-   ```ini
-   monitor=,preferred,auto,1
+   ```lua
+   hl.monitor({
+       output   = "",
+       mode     = "preferred",
+       position = "auto",
+       scale    = "auto",
+   })
    ```
 
 2. **Mouse:** remove or change the
    `logitech-g502-hero-gaming-mouse` device block if that is not the installed
    mouse.
-3. **Wallpaper:** either place an image at
-   `~/Pictures/wallpapers/limine-splash-2.png` or change the path in
-   `hypr/hyprpaper.conf`. The wallpaper is not included in this repository.
+3. **Wallpaper:** copy the included wallpapers with
+   `cp ~/Projects/Dotfiles/images/wallpapers/*.jpg ~/Pictures/wallpapers/`, or
+   place your own image there and change the paths in `hypr/hyprpaper.conf`
+   and `hypr/hyprlock.conf`.
 4. **User paths:** the active files currently use `/home/evan`, which is
    correct only for the `evan` account:
-   - `hypr/keybinds.conf`;
-   - `hypr/hyprpaper.conf`; and
+   - `hypr/keybinds.lua`;
+   - `hypr/hyprpaper.conf`;
+   - `hypr/hyprlock.conf`; and
    - `waybar/config.jsonc`.
 5. **Waybar temperature:** `waybar/config.jsonc` assumes thermal zone 2 and
    `/sys/class/hwmon/hwmon2/temp1_input`. Update these for the desktop or remove
@@ -500,11 +512,16 @@ firmware and that Windows Boot Manager still has a UEFI entry.
 
 ### Hyprland starts with a blank or unusable display
 
-Switch to another TTY with `Ctrl+Alt+F3`, log in, and replace the monitor lines
-in `~/Projects/Dotfiles/hypr/hyprland.conf` with:
+Switch to another TTY with `Ctrl+Alt+F3`, log in, and replace the `hl.monitor`
+blocks in `~/Projects/Dotfiles/hypr/hyprland.lua` with:
 
-```ini
-monitor=,preferred,auto,1
+```lua
+hl.monitor({
+    output   = "",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "auto",
+})
 ```
 
 Return to SDDM or reboot, run `hyprctl monitors all`, and then configure the

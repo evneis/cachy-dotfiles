@@ -4,11 +4,13 @@ Hyprland-based desktop configuration for Arch Linux: compositor, status bar, fil
 
 For a complete NVIDIA, Windows dual-boot, and Secure Boot installation walkthrough, see [CachyOS desktop setup](CACHYOS_SETUP.md).
 
+To apply these dotfiles to an already-installed Arch-based system, see [Wiring these dotfiles on a new system](WIRING.md).
+
 ## Structure
 
 | Folder      | Description |
 |------------|-------------|
-| **hypr/**  | Hyprland compositor config (`hyprland.conf`, `keybinds.conf`, `hyprpaper.conf`, `hyprlock.conf`) |
+| **hypr/**  | Hyprland compositor config (`hyprland.lua`, `keybinds.lua`, `hyprpaper.conf`, `hyprlock.conf`); `.conf.x` files are legacy backups |
 | **waybar/**| Waybar status bar (config, layouts, CSS, scripts). See [waybar/dependency.md](waybar/dependency.md) for module-level details. |
 | **wlogout/** | Session power menu layout and style (lock uses `hyprlock`) |
 | **yazi/**  | Yazi terminal file manager config and keymap |
@@ -73,10 +75,10 @@ sudo pacman -S \
 Install an AUR helper first (e.g. [yay](https://github.com/Jguer/yay)), then:
 
 ```bash
-# App launcher & clipboard (used in hyprland.conf autostart)
+# App launcher & clipboard (used in hyprland.lua autostart)
 yay -S walker-bin elephant-all
 
-# Browser (set as $browser in hyprland.conf)
+# Browser (set as the browser global in hyprland.lua)
 yay -S zen-browser-bin
 
 # Nerd font for Waybar (or use ttf-jetbrains-mono-nerd)
@@ -86,7 +88,7 @@ yay -S ttf-jetbrains-mono-nerd
 ### Optional / replaceable
 
 - **yay** – Waybar’s `custom/pkg-aur` uses it; use another AUR helper and change the `exec` in `waybar/config.jsonc` if needed.
-- **obsidian**, **cursor** / **cursor-bin**, **vesktop** – Keybound in `hypr/keybinds.conf`; install if you use them.
+- **obsidian**, **cursor** / **cursor-bin**, **vesktop** – Keybound in `hypr/keybinds.lua`; install if you use them.
 - **blueman** – Only if you enable Waybar’s `bluetooth` module and its `on-click` (e.g. `blueman-manager`).
 - **qt6ct** – Qt theming; optional if you don’t care about Qt app appearance.
 - **sddm-silent-theme** – AUR package alternative to copying `usr/share/sddm/themes/silent` from this repo.
@@ -166,7 +168,7 @@ sudo pacman -S --needed - < packages/cider.txt
    ln -s ~/Projects/Dotfiles/fastfetch ~/.config/fastfetch
    ```
 
-2. **Hyprland**: Uses `kitty`, `dolphin`, `walker`, `zen-browser`; change `hyprland.conf` if you use different apps.
+2. **Hyprland**: Uses `kitty`, `dolphin`, `walker`, `zen-browser`; change the program globals in `hyprland.lua` if you use different apps.
 3. **Waybar**: Uses `fish` and `kitty` in some on-click commands; see [waybar/dependency.md](waybar/dependency.md) for modules and alternatives.
 4. **Yazi**: Opens `nvim`, `vlc`, `imv`, and `tdf` for edit/play/images/PDFs; uses `kitty` and `fish` in the opener. Adjust `yazi.toml` if your stack differs.
 5. **wlogout**: Lock action runs `hyprlock`; other actions use `systemctl` / `loginctl`.
