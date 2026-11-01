@@ -1,0 +1,11 @@
+elephant
+elephant-desktopapplications
+endcord
+lexend-fonts-git
+pcloud-drive
+sddm-silent-theme
+steamcmd
+stremio
+ttf-font-awesome-5
+vesktop
+xivlauncher

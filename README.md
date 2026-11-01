@@ -13,6 +13,7 @@ For a complete NVIDIA, Windows dual-boot, and Secure Boot installation walkthrou
 | **wlogout/** | Session power menu layout and style (lock uses `hyprlock`) |
 | **yazi/**  | Yazi terminal file manager config and keymap |
 | **fastfetch/** | Fastfetch system info config |
+| **packages/** | Exact package snapshot (`pacman.txt`, `aur.txt`, `cider.txt`) and `generate.sh` |
 | **usr/share/sddm** | SDDM login manager themes (includes Silent) and configs |
 
 ## Dependencies
@@ -105,6 +106,50 @@ sudo pacman -S base-devel git hyprland hyprpaper hyprlock \
 
 # AUR (with yay)
 yay -S walker-bin elephant-all zen-browser-bin ttf-jetbrains-mono-nerd
+```
+
+## Exact package snapshot (reference machine)
+
+`packages/` holds a full snapshot of the explicitly installed packages from the
+reference CachyOS machine:
+
+| File | Contents |
+|------|----------|
+| `packages/pacman.txt` | 205 repo packages |
+| `packages/aur.txt` | 11 AUR packages |
+| `packages/cider.txt` | Cider Collective app (third-party repo) |
+
+Restore on an identical CachyOS install:
+
+```bash
+sudo pacman -S --needed - < packages/pacman.txt && yay -S --needed - < packages/aur.txt
+```
+
+`--needed` skips packages that are already installed, so the command is safe to
+re-run. Kernel, kernel headers, and NVIDIA driver packages are intentionally
+excluded — install the ones that match the target hardware (see
+[CACHYOS_SETUP.md](CACHYOS_SETUP.md)).
+
+To refresh the snapshot after installing or removing packages:
+
+```bash
+packages/generate.sh
+```
+
+`cider` comes from the third-party `cidercollective` repo rather than the AUR.
+To install it, add the repo and its signing key first:
+
+```ini
+[cidercollective]
+SigLevel = Required TrustedOnly
+Server = https://repo.cider.sh/arch
+```
+
+```bash
+sudo pacman-key --recv-keys A0CD6B993438E22634450CDD2A236C3F42A61682
+sudo pacman-key --lsign-key A0CD6B993438E22634450CDD2A236C3F42A61682
+sudo pacman -Syu
+sudo pacman -S --needed - < packages/cider.txt
 ```
 
 ## Setup
