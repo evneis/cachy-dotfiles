@@ -1,6 +1,5 @@
 elephant
 elephant-desktopapplications
-endcord
 lexend-fonts-git
 pcloud-drive
 sddm-silent-theme
