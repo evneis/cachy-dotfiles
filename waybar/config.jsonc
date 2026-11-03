@@ -250,11 +250,11 @@
     "signal": 8,
   },
   "wireplumber": {
-    "format": "{icon}",
+    "format": "{icon} {volume:>3}%",
     "tooltip-format": "{icon}{volume:>3}%",
     "format-muted": "󰖁 {volume:>3}%",
     "format-bluetooth": "{icon} {volume:>2}% 󰂯", //{format_source}",
-    "format-bluetooth-muted": "󰖁 {icon} 󰂯", //{format_source}",
+    "format-bluetooth-muted": "󰖁 {volume:>3}% 󰂯", //{format_source}",
     "format-icons": [
       "",
       "",
